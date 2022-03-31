@@ -32,7 +32,14 @@ def is_event_active(events, now):
 def is_work_time(now):
     return now < WORK_STOP and now > WORK_START
 
+def format_text(text):
+    text = text[:16]
+    text += f"\n" + text[16:]
+    return text
+
 def update_display(color, text, cursor = False, blink = False):
+    print(text)
+    text = format_text(text)
     print(text)
     lcd.color = color
     lcd.message = text
