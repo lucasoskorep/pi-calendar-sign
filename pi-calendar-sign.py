@@ -1,3 +1,8 @@
+
+import board
+import busio
+import adafruit_character_lcd.character_lcd_rgb_i2c as character_lcd
+
 from datetime import datetime, time
 
 from pytz import timezone
@@ -8,37 +13,52 @@ TIMEZONE = timezone('US/Eastern')
 WORK_START = time(9, 00)
 WORK_STOP = time(17, 00)
 
+COLOR_RED = [100, 0, 0]
+COLOR_GREEN = [0, 100, 0]
+COLOR_BLUE = [0, 0, 100]
+COLOR_PURPLE = [100, 0, 50]
+
+lcd_columns = 16
+lcd_rows = 2
+i2c = busio.I2C(board.SCL, board.SDA)
+lcd = character_lcd.Character_LCD_RGB_I2C(i2c, lcd_columns, lcd_rows)
+
 
 def is_event_active(events, now):
     for event in events:
         if event.start_time < now and event.end_time > now:
-            print("EVENT IS ACTIVE")
 
 
 def is_work_time(now):
     return now < WORK_STOP and now > WORK_START
+
+def update_display(color, text, cursor = False, blink = False):
+    print(text)
+    lcd.color = color
+    lcd.message = text
+    lcd.cursor = cursor
+    lcd.blink = blink
 
 
 def process_events(events):
     now = datetime.now(tz=TIMEZONE)
     print("PROCESSING EVENTS")
     is_working_time = is_work_time(now.time())
-    print(is_working_time)
     if is_event_active(events, now):
         if is_working_time:
-            print("Meeting in Progress")
+            update_display(color=COLOR_RED, text="Meeting in Progress")
         else:
-            print("Fuck me -_-")
+            update_display(color=COLOR_RED, text="Fuck me -_-")
     else:
         if is_working_time:
-            print("Work time - No event")
+            update_display(color=COLOR_BLUE, text = "Work time - No event")
         else:
-            print("Looks like 420 to me ayooo")
+            update_display(color=COLOR_GREEN, text = "Looks like 420 to me ayooo")
 
 
 def main():
     cg = CalGrab("./.auth.json", "loskorep@productiveedge.com", [process_events])
-    cg.update_at_interval(5, 15)
+    cg.update_at_interval(5)
 
 
 if __name__ == '__main__':

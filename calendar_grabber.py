@@ -47,7 +47,7 @@ class CalGrab(object):
                 events = [Event.get_from_gcal_api_json(json) for json in events]
                 for callback in self.callbacks:
                     callback(events)
-                if (now-start).total_seconds() > time_to_update:
+                if time_to_update > 0 and (now-start).total_seconds() > time_to_update:
                     return
                 sleep(frequency)
         except HttpError as error:
