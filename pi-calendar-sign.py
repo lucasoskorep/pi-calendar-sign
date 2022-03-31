@@ -41,6 +41,7 @@ def format_text(text):
 
 def update_display(color, text, cursor = False, blink = False):
     text = format_text(text)
+    lcd.clear()
     lcd.color = color
     lcd.message = text
     lcd.cursor = cursor
