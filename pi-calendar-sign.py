@@ -61,7 +61,7 @@ def process_events(events):
         if is_working_time:
             update_display(color=COLOR_BLUE, text = "Work time - No event")
         else:
-            update_display(color=COLOR_GREEN, text = "Looks like 420 to me ayooo")
+            update_display(color=COLOR_GREEN, text = "Ayooo Looks like 420 lets blaze!")
 
 
 def main():
