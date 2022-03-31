@@ -14,4 +14,4 @@ class Event(object):
     @staticmethod
     def get_from_gcal_api_json(json):
         print(json['start'].get('dateTime') )
-        return Event(json['summary'], parse(json['start'].get('dateTime')), parse(json['end'].get('dateTime')))
+        return Event(json['summary'] if 'summary' in json else "No Title" , parse(json['start'].get('dateTime')), parse(json['end'].get('dateTime')))
