@@ -1,10 +1,8 @@
-
-import board
-import busio
-import adafruit_character_lcd.character_lcd_rgb_i2c as character_lcd
-
 from datetime import datetime, time
 
+import adafruit_character_lcd.character_lcd_rgb_i2c as character_lcd
+import board
+import busio
 from pytz import timezone
 
 from calendar_grabber import CalGrab
@@ -32,7 +30,8 @@ def is_event_active(events, now):
 def is_work_time(now):
     return now < WORK_STOP and now > WORK_START
 
-def update_display(color, text, cursor = False, blink = False):
+
+def update_display(color, text, cursor=False, blink=False):
     print(text)
     lcd.color = color
     lcd.message = text
@@ -51,9 +50,9 @@ def process_events(events):
             update_display(color=COLOR_RED, text="Fuck me -_-")
     else:
         if is_working_time:
-            update_display(color=COLOR_BLUE, text = "Work time - No event")
+            update_display(color=COLOR_BLUE, text="Work time - No event")
         else:
-            update_display(color=COLOR_GREEN, text = "Looks like 420 to me ayooo")
+            update_display(color=COLOR_GREEN, text="Looks like 420 to me ayooo")
 
 
 def main():
