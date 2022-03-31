@@ -12,6 +12,7 @@ from calendar_grabber import CalGrab
 TIMEZONE = timezone('US/Eastern')
 WORK_START = time(9, 00)
 WORK_STOP = time(17, 00)
+CALENDAR = "lucas.oskorep@gmail.com"
 
 COLOR_RED = [100, 0, 0]
 COLOR_GREEN = [0, 100, 0]
@@ -22,6 +23,7 @@ lcd_columns = 16
 lcd_rows = 2
 i2c = busio.I2C(board.SCL, board.SDA)
 lcd = character_lcd.Character_LCD_RGB_I2C(i2c, lcd_columns, lcd_rows)
+
 
 
 def is_event_active(events, now):
@@ -61,7 +63,7 @@ def process_events(events):
 
 
 def main():
-    cg = CalGrab("./.auth.json", "loskorep@productiveedge.com", [process_events])
+    cg = CalGrab("./.auth.json", CALENDAR, [process_events])
     cg.update_at_interval(5)
 
 

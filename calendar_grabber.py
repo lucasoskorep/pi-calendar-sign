@@ -12,6 +12,7 @@ class CalGrab(object):
 
     def __init__(self, auth_file, calendars=[], callbacks=[]):
         self.calendars = calendars
+        # TODO: Add multiple calendar support
         self.callbacks = callbacks
         self.creds = service_account.Credentials.from_service_account_file(
             auth_file, scopes=['https://www.googleapis.com/auth/calendar.readonly'])
