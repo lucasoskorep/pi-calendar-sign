@@ -38,9 +38,7 @@ def format_text(text):
     return formatted
 
 def update_display(color, text, cursor = False, blink = False):
-    print(text)
     text = format_text(text)
-    print(text)
     lcd.color = color
     lcd.message = text
     lcd.cursor = cursor
@@ -49,9 +47,7 @@ def update_display(color, text, cursor = False, blink = False):
 
 def process_events(events):
     now = datetime.now(tz=TIMEZONE)
-    print("PROCESSING EVENTS")
     is_working_time = is_work_time(now.time())
-    print(is_working_time)
     if is_event_active(events, now):
         if is_working_time:
             update_display(color=COLOR_RED, text="Meeting in Progress")
