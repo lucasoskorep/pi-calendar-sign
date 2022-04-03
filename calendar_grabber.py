@@ -42,7 +42,6 @@ class CalGrab(object):
                     orderBy='startTime'
                 ).execute()
                 events = events_result.get('items', [])
-
                 if not events:
                     print('No upcoming events found.')
                     return

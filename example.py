@@ -1,9 +1,11 @@
 from calendar_grabber import CalGrab
 
+
 def process_events(events):
     print("PROCESSING EVENTS")
     for event in events:
         print(event)
+
 
 def main():
     cg = CalGrab("./.auth.json", "loskorep@productiveedge.com", [process_events])
