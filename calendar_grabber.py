@@ -46,7 +46,9 @@ class CalGrab(object):
                     print('No upcoming events found.')
                     return
 
-                events = [Event.get_from_gcal_api_json(json) for json in events]
+                events = [i for i in  [Event.get_from_gcal_api_json(json) for json in events] if i is not None]
+                print(events)
+
                 for callback in self.callbacks:
                     callback(events)
                 if time_to_update > 0 and (now - start).total_seconds() > time_to_update:
