@@ -28,9 +28,10 @@ class CalGrab(object):
         :param time_to_update: normally set to -1 aka no limit.  Time in minutes to continually ping the api for.
         :return: None
         """
-        try:
-            start = None
-            while True:
+        start = None
+        while True:
+
+            try:
                 now = datetime.utcnow()  # 'Z' indicates UTC time
                 if start == None:
                     start = now
@@ -46,7 +47,7 @@ class CalGrab(object):
                     print('No upcoming events found.')
                     return
 
-                events = [i for i in  [Event.get_from_gcal_api_json(json) for json in events] if i is not None]
+                events = [i for i in [Event.get_from_gcal_api_json(json) for json in events] if i is not None]
                 print(events)
 
                 for callback in self.callbacks:
@@ -54,5 +55,5 @@ class CalGrab(object):
                 if time_to_update > 0 and (now - start).total_seconds() > time_to_update:
                     return
                 sleep(frequency)
-        except HttpError as error:
-            print('An error occurred: %s' % error)
+            except HttpError as error:
+                print('An error occurred: %s' % error)
