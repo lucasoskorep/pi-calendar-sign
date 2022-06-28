@@ -10,7 +10,8 @@ from calendar_grabber import CalGrab
 TIMEZONE = timezone('US/Eastern')
 WORK_START = time(9, 00)
 WORK_STOP = time(17, 00)
-CALENDAR = "lucas.oskorep@gmail.com"
+WORK_DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+CALENDAR = ""  # Add your desired calendar here
 
 COLOR_RED = [100, 0, 0]
 COLOR_GREEN = [0, 100, 0]
@@ -51,16 +52,20 @@ def update_display(color, text, cursor=False, blink=False):
 def process_events(events):
     now = datetime.now(tz=TIMEZONE)
     is_working_time = is_work_time(now.time())
+    is_weekend = now.weekday() not in WORK_DAYS
+
     if is_event_active(events, now):
-        if is_working_time:
+        if is_weekend:
+            update_display(color=COLOR_PURPLE, text="Welp its the weekend and still working -_-")
+        elif is_working_time:
             update_display(color=COLOR_RED, text="Meeting in Progress")
         else:
-            update_display(color=COLOR_RED, text="Fuck this -_-")
+            update_display(color=COLOR_RED, text="Get me out of here -_-")
     else:
-        if is_working_time:
-            update_display(color=COLOR_BLUE, text="Work time - No event")
+        if is_weekend or not is_working_time:
+            update_display(color=COLOR_GREEN, text="Non-working time.  No event. ")
         else:
-            update_display(color=COLOR_GREEN, text="Ayooo Looks like 420 lets blaze!")
+            update_display(color=COLOR_BLUE, text="Work time - No event")
 
 
 def main():
