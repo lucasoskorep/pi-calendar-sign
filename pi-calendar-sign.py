@@ -10,7 +10,7 @@ from calendar_grabber import CalGrab
 TIMEZONE = timezone('US/Eastern')
 WORK_START = time(9, 00)
 WORK_STOP = time(17, 00)
-WORK_DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+WORK_DAYS = [0, 1, 2, 3, 4]
 with open("config.json") as f:
     CALENDARS = json.load(f)
     print(CALENDARS)
