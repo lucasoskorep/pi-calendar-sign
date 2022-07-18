@@ -1,9 +1,9 @@
-from datetime import datetime, time
-
 import adafruit_character_lcd.character_lcd_rgb_i2c as character_lcd
 import board
 import busio
+import json
 from pytz import timezone
+from datetime import datetime, time
 
 from calendar_grabber import CalGrab
 
@@ -11,9 +11,9 @@ TIMEZONE = timezone('US/Eastern')
 WORK_START = time(9, 00)
 WORK_STOP = time(17, 00)
 WORK_DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
-CALENDARS = [
-    "",
-]  # Add your desired calendar here
+with open("config.json") as f:
+    CALENDARS = json.load(f)
+    print(CALENDARS)
 
 COLOR_RED = [100, 0, 0]
 COLOR_GREEN = [0, 100, 0]

@@ -1,3 +1,5 @@
+import json
+
 from calendar_grabber import CalGrab
 
 
@@ -8,7 +10,10 @@ def process_events(events):
 
 
 def main():
-    cg = CalGrab("./.auth.json", "loskorep@productiveedge.com", [process_events])
+    with open("config.json") as f:
+        CALENDARS = json.load(f)
+        print(CALENDARS)
+    cg = CalGrab("./.auth.json", CALENDARS, [process_events])
     cg.update_at_interval(5, 15)
 
 
