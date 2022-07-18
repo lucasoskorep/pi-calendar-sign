@@ -11,7 +11,9 @@ TIMEZONE = timezone('US/Eastern')
 WORK_START = time(9, 00)
 WORK_STOP = time(17, 00)
 WORK_DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
-CALENDAR = ""  # Add your desired calendar here
+CALENDARS = [
+    "",
+]  # Add your desired calendar here
 
 COLOR_RED = [100, 0, 0]
 COLOR_GREEN = [0, 100, 0]
@@ -69,8 +71,8 @@ def process_events(events):
 
 
 def main():
-    cg = CalGrab("./.auth.json", CALENDAR, [process_events])
-    cg.update_at_interval(5)
+    cg = CalGrab("./.auth.json", [CALENDARS], [process_events])
+    cg.update_at_interval(10)
 
 
 if __name__ == '__main__':
