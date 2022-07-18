@@ -1,4 +1,5 @@
 .auth*
 config.json
-./venv
-./idea
+./venv/
+/.idea/inspectionProfiles/
+/.idea/

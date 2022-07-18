@@ -55,6 +55,7 @@ def process_events(events):
     now = datetime.now(tz=TIMEZONE)
     is_working_time = is_work_time(now.time())
     is_weekend = now.weekday() not in WORK_DAYS
+    print(is_weekend, now.weekday())
 
     if is_event_active(events, now):
         if is_weekend:
