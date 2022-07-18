@@ -39,7 +39,7 @@ class CalGrab(object):
                     start = now
                 all_events = []
                 for calendar in self.calendars:
-                    print("processing calendar")
+                    print(f"processing {calendar}")
                     events_result = self.service.events().list(
                         calendarId=calendar,
                         timeMin=now.isoformat() + 'Z',

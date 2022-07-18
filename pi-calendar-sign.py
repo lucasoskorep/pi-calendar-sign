@@ -71,7 +71,7 @@ def process_events(events):
 
 
 def main():
-    cg = CalGrab("./.auth.json", [CALENDARS], [process_events])
+    cg = CalGrab("./.auth.json", CALENDARS, [process_events])
     cg.update_at_interval(10)
 
 
