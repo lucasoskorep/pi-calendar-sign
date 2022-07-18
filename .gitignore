@@ -1,1 +1,4 @@
 .auth*
+config.json
+./venv**
+./idea**
