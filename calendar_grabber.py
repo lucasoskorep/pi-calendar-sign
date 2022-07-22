@@ -59,5 +59,6 @@ class CalGrab(object):
                 if time_to_update > 0 and (now - start).total_seconds() > time_to_update:
                     return
                 sleep(frequency)
-            except HttpError as error:
+            except Exception as error:
                 print('An error occurred: %s' % error)
+                sleep(60)
